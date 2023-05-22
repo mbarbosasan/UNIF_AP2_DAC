@@ -1,31 +1,21 @@
 package com.example.ap2_dac.entities;
 
-import com.sun.istack.NotNull;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table
 public class Usuario {
-    @Column(name = "id_usuario")
-    @GeneratedValue
     @Id
+    @GeneratedValue
     private Long id;
     @Column
-    @NotNull
-    private String user;
+    private String usuarioLogin;
     @Column
-    @NotNull
     private String senha;
-    @Column
-    private String email;
 
     public Usuario(String user, String senha, String email) {
-        this.user = user;
+        this.usuarioLogin = user;
         this.senha = senha;
-        this.email = email;
     }
 
     public Usuario() {
@@ -40,12 +30,12 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getUser() {
-        return user;
+    public String getUsuarioLogin() {
+        return usuarioLogin;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setUsuarioLogin(String user) {
+        this.usuarioLogin = user;
     }
 
     public String getSenha() {
@@ -56,12 +46,5 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 }
 

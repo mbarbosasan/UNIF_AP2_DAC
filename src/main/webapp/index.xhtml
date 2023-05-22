@@ -9,24 +9,27 @@
 </h:head>
 <h:body>
     <div class="hero is-fullheight is-flex is-justify-content-center is-align-items-center has-background-primary">
-            <form class="card" style="width: 50%">
+        <p:messages id="messages" showDetail="true" closable="true">
+            <p:autoUpdate/>
+        </p:messages>
+        <h:form class="card" style="width: 50%">
                 <header class="card-title">
                     <p class="card-header-title">Login</p>
                 </header>
                 <div class="card-content">
                     <div class="field ">
-                        <label for="usuario" class="label ">Usuário</label>
+                        <p:outputLabel for="usuario" class="label" value="Usuario"/>
                         <div class="control has-icons-left">
-                            <input id="usuario" class="input" type="text" value="#{loginBean.usuario.user}" placeholder="Usuário"/>
+                            <p:inputText id="usuario" class="input" type="text" value="#{loginBean.usuario.usuarioLogin}" placeholder="Usuário"/>
                             <span class="icon is-small is-left">
                                 <i class="fas fa-user"></i>
                             </span>
                         </div>
                     </div>
                     <div class="field">
-                        <label for="senha" class="label">Senha</label>
+                        <p:outputLabel for="senha" class="label" value="Senha"/>
                         <div class="control has-icons-left">
-                            <input id="senha" class="input" value="#{loginBean.usuario.senha}" type="password" placeholder="Senha"/>
+                            <p:inputText id="senha" class="input" value="#{loginBean.usuario.senha}" type="password" placeholder="Senha"/>
                             <span class="icon is-small is-left">
                                 <i class="fas fa-lock"></i>
                             </span>
@@ -36,8 +39,10 @@
                         <p:commandButton class="card-footer-item button is-success" value="Enviar" action="#{loginBean.save}"/>
                     </footer>
                 </div>
-
-            </form>
+                <div>
+                    <p>Caso você ainda não tenha uma conta, <a href="cadastro.xhtml">crie uma aqui</a>.</p>
+                </div>
+            </h:form>
     </div>
 </h:body>
 </html>

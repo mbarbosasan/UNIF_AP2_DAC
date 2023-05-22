@@ -5,7 +5,7 @@ import com.example.ap2_dac.util.JPAUtil;
 
 import javax.persistence.EntityManager;
 
-public class UsuarioDAO {
+public class LoginDAO {
     public static void save(Usuario usuario) {
         EntityManager em = JPAUtil.getEntityManager();
         em.getTransaction().begin();
@@ -16,7 +16,7 @@ public class UsuarioDAO {
 
     public static Usuario getUsuario(String usuario, String senha) {
         EntityManager em = JPAUtil.getEntityManager();
-        Usuario usuarioEncontrado = em.createQuery("SELECT u FROM Usuario u WHERE u.usuario = :usuario AND u.senha = :senha", Usuario.class)
+        Usuario usuarioEncontrado = em.createQuery("SELECT u FROM Usuario u WHERE u.usuarioLogin = :usuario AND u.senha = :senha", Usuario.class)
                 .setParameter("usuario", usuario)
                 .setParameter("senha", senha)
                 .getSingleResult();
