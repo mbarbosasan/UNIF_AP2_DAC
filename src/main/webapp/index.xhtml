@@ -1,0 +1,43 @@
+<html xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns="http://www.w3.org/1999/xhtml">
+<h:head>
+    <title>UNIFAMETRO 2023.1 - DAC</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"></link>
+    <script src="https://kit.fontawesome.com/129f4a85d2.js" crossorigin="anonymous"></script>
+</h:head>
+<h:body>
+    <div class="hero is-fullheight is-flex is-justify-content-center is-align-items-center has-background-primary">
+            <form class="card" style="width: 50%">
+                <header class="card-title">
+                    <p class="card-header-title">Login</p>
+                </header>
+                <div class="card-content">
+                    <div class="field ">
+                        <label for="usuario" class="label ">Usuário</label>
+                        <div class="control has-icons-left">
+                            <input id="usuario" class="input" type="text" value="#{loginBean.usuario.user}" placeholder="Usuário"/>
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-user"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="senha" class="label">Senha</label>
+                        <div class="control has-icons-left">
+                            <input id="senha" class="input" value="#{loginBean.usuario.senha}" type="password" placeholder="Senha"/>
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <p:commandButton class="card-footer-item button is-success" value="Enviar" action="#{loginBean.save}"/>
+                    </footer>
+                </div>
+
+            </form>
+    </div>
+</h:body>
+</html>
