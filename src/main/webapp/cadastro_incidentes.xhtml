@@ -7,13 +7,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"></link>
     <script src="https://kit.fontawesome.com/129f4a85d2.js" crossorigin="anonymous"></script>
 </h:head>
-<h:body class="hero is-fullheight is-flex is-justify-content-center is-align-items-center has-background-primary">
-    <h:form class="card" style="max-width: 90vw; max-height: 90vh; overflow: scroll">
+<h:body class="hero is-fullheight is-flex is-justify-content-center is-align-items-center has-background-primary-dark">
+    <h:form class="card" style="max-width: 90vw; max-height: 90vh; overflow-y: scroll">
         <p:growl id="growl" showDetail="true" sticky="true"/>
-        <header class="card-header" style="position: fixed; background-color: #FFFFFF; width: 88.5vw; z-index: 1000">
+        <header class="card-header is-flex is-align-items-center flex-direction-column" style="position: fixed; background-color: #FFFFFF; width: 88.5vw; z-index: 1000">
             <p class="card-header-title">Cadastro de Incidentes</p>
+            <a href="lista_incidentes.xhtml" class="button is-link">Lista de Incidentes</a>
         </header>
-        <main class="card-content">
+        <main class="card-content mt-6">
             <h3 class="title is-4">Informações pessoais</h3>
             <div class="field">
                 <p:outputLabel for="nomeVitima" class="label" value="Seu nome"/>
@@ -180,7 +181,7 @@
                 </div>
             </div>
             <footer class="card-footer">
-                <p:commandButton class="card-footer-item button is-link" value="Salvar" action="#{incidenteBean.save}" update="growl"/>
+                <p:commandButton class="card-footer-item button is-primary" value="Salvar" action="#{incidenteBean.save}" update="growl"/>
             </footer>
         </main>
     </h:form>

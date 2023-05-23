@@ -9,11 +9,9 @@
 </h:head>
 <h:body>
     <div class="hero is-fullheight is-flex is-justify-content-center is-align-items-center has-background-primary">
-        <p:messages id="messages" showDetail="true" closable="true">
-            <p:autoUpdate/>
-        </p:messages>
         <h:form class="card" style="width: 50%">
-                <header class="card-title">
+            <p:growl id="growl" showDetail="true" sticky="true" escape="false"/>
+            <header class="card-title">
                     <p class="card-header-title">Login</p>
                 </header>
                 <div class="card-content">
@@ -29,18 +27,19 @@
                     <div class="field">
                         <p:outputLabel for="senha" class="label" value="Senha"/>
                         <div class="control has-icons-left">
-                            <p:inputText id="senha" class="input" value="#{loginBean.usuario.senha}" type="password" placeholder="Senha"/>
+                            <p:inputText id="senha" class="input" value="#{loginBean.usuario.senha}" type="password"/>
                             <span class="icon is-small is-left">
                                 <i class="fas fa-lock"></i>
                             </span>
                         </div>
                     </div>
                     <footer class="card-footer">
-                        <p:commandButton class="card-footer-item button is-success" value="Enviar" action="#{loginBean.login}"/>
+                        <p:commandButton class="card-footer-item button is-success" value="Enviar" action="#{loginBean.login}" update="growl"/>
                     </footer>
                 </div>
-                <div class="is-flex is-justify-content-center pb-1">
-                    <p>Caso você ainda não tenha uma conta, <a href="cadastro.xhtml">crie uma aqui</a>.</p>
+                <div class="is-flex is-flex-direction-column is-justify-content-center is-align-items-center pb-1">
+                    <p>Caso você ainda não tenha uma conta, <a href="cadastro.xhtml">cadastre-se aqui</a>.</p>
+                    <p>Deseja cadastrar um incidente? <a href="cadastro_incidentes.xhtml">clique aqui</a></p>
                 </div>
             </h:form>
     </div>

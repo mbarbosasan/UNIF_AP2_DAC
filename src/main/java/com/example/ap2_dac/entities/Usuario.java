@@ -1,6 +1,7 @@
 package com.example.ap2_dac.entities;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table
@@ -14,6 +15,9 @@ public class Usuario {
     private String senha;
     @Column
     private String email;
+    @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataCadastro;
 
     public Usuario(String user, String senha, String email) {
         this.usuarioLogin = user;
@@ -54,6 +58,14 @@ public class Usuario {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Date getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(Date dataCadastro) {
+        this.dataCadastro = dataCadastro;
     }
 }
 

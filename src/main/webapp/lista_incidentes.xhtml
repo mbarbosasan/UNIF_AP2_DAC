@@ -8,17 +8,76 @@
     <script src="https://kit.fontawesome.com/129f4a85d2.js" crossorigin="anonymous"></script>
 </h:head>
 <h:body>
-    <div class="hero is-fullheight is-flex is-justify-content-center is-align-items-center has-background-primary">
-        <div class="container">
-            <a class="button is-primary" href="cadastro_incidentes.xhtml">Cadastrar incidentes</a>
+    <div class="hero is-fullheight is-flex is-justify-content-center is-align-items-center has-background-primary-dark">
+        <div class="box is-flex is-flex-direction-column is-align-items-center" style="min-width: 30vw;">
+            <span class="subtitle is-6">Ações rápidas</span>
+            <div class="is-flex is-align-items-center is-justify-content-space-evenly" style="width: 95%">
+                <a class="button is-link" href="cadastro_incidentes.xhtml">Cadastrar incidentes</a>
+                <a href="lista_usuarios.xhtml" class="button is-link mr-3 ml-3">Lista de Usuários</a>
+                <a class="button is-danger" href="index.xhtml">Deslogar</a>
+            </div>
         </div>
         <h:form>
-            <p:messages id="messages" showDetail="true" closable="true" escape="false">
-                <p:autoUpdate/>
-            </p:messages>
-            <p:dataTable var="incidente">
+            <p:growl id="growl" showDetail="true" sticky="true"/>
+            <p:dataTable var="incidente" value="#{incidenteBean.incidentes}" rowKey="#{incidente.id}" class="table" style="max-width: 95vw">
+               <p:column headerText="ID" style="width: 10%">
+                   <h:outputText value="#{incidente.id}"/>
+               </p:column>
+                <p:column headerText="Nome da Vítima">
+                    <h:outputText value="#{incidente.vitima.nome == null ? 'Não especificado' : incidente.vitima.nome}"/>
+                </p:column>
+                <p:column headerText="Idade da Vítima">
+                    <h:outputText value="#{incidente.vitima.idade == null ? 'Não especificado' : incidente.vitima.idade}"/>
+                </p:column>
+                <p:column headerText="Sexo da Vítima">
+                    <h:outputText value="#{incidente.vitima.sexo == null ? 'Não especificado' : incidente.vitima.sexo.equals('M') ? 'Masculino' : 'Feminino'}"/>
+                </p:column>
+                <p:column headerText="Escolaridade da Vítima">
+                    <h:outputText value="#{incidente.vitima.serieTurno == null ? 'Não especificado' : incidente.vitima.serieTurno}"/>
+                </p:column>
+                <p:column headerText="Data do Incidente">
+                    <h:outputText value="#{incidente.dataCadastro}"/>
+                </p:column>
+                <p:column headerText="Ações">
+                    <p:commandButton class="button is-primary" update="incidentePanel" icon="pi pi-plus" oncomplete="PF('infoDialog').show()" value="Informações">
+                        <f:setPropertyActionListener value="#{incidente}"
+                                                     target="#{incidenteBean.selectedIncidente}"/>
+                    </p:commandButton>
+                </p:column>
             </p:dataTable>
+
         </h:form>
     </div>
+    <p:dialog header="Informações do Incidente" widgetVar="infoDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+        <p:outputPanel id="incidentePanel" style="text-align: center">
+                <div class="container" style="min-width: 50vw">
+                    <div class="is-flex is-justify-content-space-around">
+                        <div class="is-flex is-flex-direction-column is-align-items-start">
+                            <h6 class="title is-5">Informações da Vítima</h6>
+                            <p class="is-6"><span class="has-text-weight-medium">Nome:</span> #{incidenteBean.selectedIncidente.vitima.nome == null ? "Não especificado" : incidenteBean.selectedIncidente.vitima.nome}</p>
+                            <p class="is-6"><span class="has-text-weight-medium">Idade:</span> #{incidenteBean.selectedIncidente.vitima.idade == null ? "Não especificado" : incidenteBean.selectedIncidente.vitima.idade}</p>
+                            <p class="is-6"><span class="has-text-weight-medium">Sexo:</span> #{incidente.selectedIncidente.vitima.sexo == null ? 'Não especificado' : incidente.selectedIncidente.agressor.sexo.equals('M') ? 'Masculino' : 'Feminino'}</p>
+                            <p class="is-6"><span class="has-text-weight-medium">Escolaridade:</span> #{incidenteBean.selectedIncidente.vitima.serieTurno == null ? "Não especificado" : incidenteBean.selectedIncidente.vitima.serieTurno}</p>
+                        </div>
+                        <div class="is-flex is-flex-direction-column is-align-items-start">
+                            <h6 class="title is-5">Informações do Agressor</h6>
+                            <p class="is-6"><span class="has-text-weight-medium">Nome:</span> #{incidenteBean.selectedIncidente.agressor.nome == null ? "Não especificado" : incidenteBean.selectedIncidente.agressor.nome}</p>
+                            <p class="is-6"><span class="has-text-weight-medium">Idade:</span> #{incidenteBean.selectedIncidente.agressor.idade == null ? "Não especificado" : incidenteBean.selectedIncidente.agressor.idade}</p>
+                            <p class="is-6"><span class="has-text-weight-medium">Sexo:</span> #{incidente.selectedIncidente.agressor.sexo == null ? 'Não especificado' : incidente.selectedIncidente.agressor.sexo.equals('M') ? 'Masculino' : 'Feminino'}</p>
+                            <p class="is-6"><span class="has-text-weight-medium">Escolaridade:</span> #{incidenteBean.selectedIncidente.agressor.escolaridade == null ? "Não especificado" : incidenteBean.selectedIncidente.agressor.escolaridade}</p>
+                        </div>
+                    </div>
+                    <div class="is-flex is-flex-direction-column is-align-items-center has-text-left">
+                        <h6 class="title is-5">Descrição do Incidente</h6>
+                        <div>
+                            <p class="is-6"><span class="has-text-weight-medium">Violência:</span> #{incidenteBean.selectedIncidente.tipoViolacao}</p>
+                            <p class="is-6"><span class="has-text-weight-medium">Data de Cadastro:</span> #{incidenteBean.selectedIncidente.dataCadastro}</p>
+                            <p class="is-6"><span class="has-text-weight-medium">Descrição:</span> </p>
+                            <p class="is-6">#{incidenteBean.selectedIncidente.descricaoIncidente}</p>
+                        </div>
+                    </div>
+                </div>
+        </p:outputPanel>
+    </p:dialog>
 </h:body>
 </html>

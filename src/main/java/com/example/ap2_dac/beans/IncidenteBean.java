@@ -8,6 +8,7 @@ import com.example.ap2_dac.util.MessagesUtil;
 
 import javax.faces.bean.ManagedBean;
 import javax.servlet.annotation.WebServlet;
+import java.util.List;
 
 @ManagedBean
 @WebServlet(name = "incidenteBean", urlPatterns = "/incidente")
@@ -15,6 +16,19 @@ public class IncidenteBean {
     Vitima vitima = new Vitima();
     Agressor agressor = new Agressor();
     Incidente incidente = new Incidente();
+
+    Incidente selectedIncidente = new Incidente();
+
+    Object incidentes;
+
+    public Object getIncidentes() {
+        try {
+            this.incidentes = IncidenteDAO.getIncidentes();
+        } catch (Exception e) {
+            MessagesUtil.errorMessage("Erro ao buscar incidentes. Stacktrace:" +  e.getMessage());
+        }
+        return incidentes;
+    }
 
     public String save() {
         try {
@@ -53,5 +67,17 @@ public class IncidenteBean {
 
     public void setIncidente(Incidente incidente) {
         this.incidente = incidente;
+    }
+
+    public void setIncidentes(List<Incidente> incidentes) {
+        this.incidentes = incidentes;
+    }
+
+    public Incidente getSelectedIncidente() {
+        return selectedIncidente;
+    }
+
+    public void setSelectedIncidente(Incidente selectedIncidente) {
+        this.selectedIncidente = selectedIncidente;
     }
 }

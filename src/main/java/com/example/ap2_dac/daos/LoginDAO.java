@@ -6,17 +6,43 @@ import com.example.ap2_dac.util.JPAUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import java.util.Date;
+import java.util.List;
 
 public class LoginDAO {
+
+    public static void update(Usuario usuario) {
+        EntityManager em = JPAUtil.getEntityManager();
+        em.getTransaction().begin();
+        em.merge(usuario);
+        em.getTransaction().commit();
+        em.close();
+    }
+
+    public static void delete(Usuario usuario) {
+        EntityManager em = JPAUtil.getEntityManager();
+        em.getTransaction().begin();
+        em.remove(em.merge(usuario));
+        em.getTransaction().commit();
+        em.close();
+    }
     public static void save(Usuario usuario) throws UsuarioExistente {
         if (usuarioExiste(usuario)) {
             throw new UsuarioExistente("Já existe um usuário cadastro com esse login ou email, verifique os dados e tente novamente.");
         }
+        usuario.setDataCadastro(new Date());
         EntityManager em = JPAUtil.getEntityManager();
         em.getTransaction().begin();
         em.persist(usuario);
         em.getTransaction().commit();
         em.close();
+    }
+
+    public static List<Usuario> getAllUsuarios() {
+        EntityManager em = JPAUtil.getEntityManager();
+        List<Usuario> usuarios = em.createQuery("SELECT u FROM Usuario u", Usuario.class).getResultList();
+        em.close();
+        return usuarios;
     }
 
     public static Usuario getUsuario(String usuario, String senha) {

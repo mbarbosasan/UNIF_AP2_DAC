@@ -1,0 +1,59 @@
+<html xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns="http://www.w3.org/1999/xhtml">
+<h:head>
+    <title>UNIFAMETRO 2023.1 - DAC</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"></link>
+    <script src="https://kit.fontawesome.com/129f4a85d2.js" crossorigin="anonymous"></script>
+</h:head>
+<h:body>
+    <div class="hero is-fullheight is-flex is-justify-content-center is-align-items-center has-background-primary-dark">
+    <div class="box is-flex is-flex-direction-column is-align-items-center" style="width: 30vw; min-width: 30vw;">
+        <span class="subtitle is-6">Ações rápidas</span>
+        <div class="is-flex is-align-items-center is-justify-content-space-evenly" style="width: 95%">
+            <a class="button is-link" href="cadastro_incidentes.xhtml">Cadastrar incidentes</a>
+            <a class="button is-danger" href="index.xhtml">Deslogar</a>
+        </div>
+    </div>
+    <h:form id="form" class="is-flex is-justify-content-center">
+        <p:growl id="growl" showDetail="true" sticky="true" escape="false"/>
+        <p:dataTable var="usuario" value="#{loginBean.listUsuarios}" editable="true" style="width: 95%">
+            <p:ajax event="rowEdit" listener="#{loginBean.updateUsuario}" update=":form:growl"/>
+            <p:column headerText="ID">
+                <h:outputText value="#{usuario.id}"/>
+            </p:column>
+            <p:column headerText="Usuario">
+                <p:cellEditor>
+                    <f:facet name="output">
+                        <h:outputText value="#{usuario.usuarioLogin}"/>
+                    </f:facet>
+                    <f:facet name="input">
+                        <p:inputText value="#{usuario.usuarioLogin}" style="width:100%"/>
+                    </f:facet>
+                </p:cellEditor>
+            </p:column>
+            <p:column headerText="Email">
+                <p:cellEditor>
+                    <f:facet name="output">
+                        <h:outputText value="#{usuario.email}"/>
+                    </f:facet>
+                    <f:facet name="input">
+                        <p:inputText value="#{usuario.email}" style="width:100%"/>
+                    </f:facet>
+                </p:cellEditor>
+            </p:column>
+            <p:column headerText="Data de Cadastro">
+                <h:outputText value="#{usuario.dataCadastro}"/>
+            </p:column>
+            <p:column headerText="Ações" class="is-flex is-align-items-center">
+                <p:commandButton value="Excluir" class="button is-danger mr-3" action="#{loginBean.deleteUsuario}" update="form">
+                    <f:setPropertyActionListener value="#{usuario}" target="#{loginBean.usuarioSelected}"/>
+                </p:commandButton>
+                <p:rowEditor editTitle="Edit Row" cancelTitle="Cancel Edit" saveTitle="Save Row"/>
+            </p:column>
+        </p:dataTable>
+    </h:form>
+    </div>
+</h:body>
+</html>

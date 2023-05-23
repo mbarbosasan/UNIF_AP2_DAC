@@ -2,6 +2,7 @@ package com.example.ap2_dac.entities;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -22,6 +23,9 @@ public class Incidente {
     private List<String> tipoViolacao;
     @Column
     private String providenciasTomadas;
+    @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataCadastro;
 
     public Incidente() {
     }
@@ -72,5 +76,13 @@ public class Incidente {
 
     public void setProvidenciasTomadas(String providenciasTomadas) {
         this.providenciasTomadas = providenciasTomadas;
+    }
+
+    public Date getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(Date dataCadastro) {
+        this.dataCadastro = dataCadastro;
     }
 }
