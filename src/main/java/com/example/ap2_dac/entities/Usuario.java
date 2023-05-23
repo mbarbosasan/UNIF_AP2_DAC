@@ -12,6 +12,8 @@ public class Usuario {
     private String usuarioLogin;
     @Column
     private String senha;
+    @Column
+    private String email;
 
     public Usuario(String user, String senha, String email) {
         this.usuarioLogin = user;
@@ -46,5 +48,12 @@ public class Usuario {
         this.senha = senha;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
 
