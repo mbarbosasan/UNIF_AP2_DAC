@@ -1,0 +1,24 @@
+<html xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns="http://www.w3.org/1999/xhtml">
+<h:head>
+    <title>UNIFAMETRO 2023.1 - DAC</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"></link>
+    <script src="https://kit.fontawesome.com/129f4a85d2.js" crossorigin="anonymous"></script>
+</h:head>
+<h:body>
+    <div class="hero is-fullheight is-flex is-justify-content-center is-align-items-center has-background-primary">
+        <div class="container">
+            <a class="button is-primary" href="cadastro_incidentes.xhtml">Cadastrar incidentes</a>
+        </div>
+        <h:form>
+            <p:messages id="messages" showDetail="true" closable="true" escape="false">
+                <p:autoUpdate/>
+            </p:messages>
+            <p:dataTable var="incidente">
+            </p:dataTable>
+        </h:form>
+    </div>
+</h:body>
+</html>

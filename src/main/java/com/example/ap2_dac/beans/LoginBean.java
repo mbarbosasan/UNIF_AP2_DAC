@@ -28,12 +28,13 @@ public class LoginBean {
         }
     }
 
-    public void login() {
+    public String login() {
         try {
             Usuario usuarioExiste = LoginDAO.getUsuario(usuario.getUsuarioLogin(), usuario.getSenha());
-            MessagesUtil.successMessage("Usuário encontrado.");
+            return "lista_incidentes?faces-redirect=true";
         } catch (Exception e) {
             MessagesUtil.errorMessage("Nome de usuário/email/senha incorretos ou usuário não existente, cadastre-se para acessar o sistema.");
+            return null;
         }
     }
 

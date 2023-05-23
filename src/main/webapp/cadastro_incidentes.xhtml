@@ -1,0 +1,188 @@
+<html xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns="http://www.w3.org/1999/xhtml">
+<h:head>
+    <title>UNIFAMETRO 2023.1 - DAC</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"></link>
+    <script src="https://kit.fontawesome.com/129f4a85d2.js" crossorigin="anonymous"></script>
+</h:head>
+<h:body class="hero is-fullheight is-flex is-justify-content-center is-align-items-center has-background-primary">
+    <h:form class="card" style="max-width: 90vw; max-height: 90vh; overflow: scroll">
+        <p:growl id="growl" showDetail="true" sticky="true"/>
+        <header class="card-header" style="position: fixed; background-color: #FFFFFF; width: 88.5vw; z-index: 1000">
+            <p class="card-header-title">Cadastro de Incidentes</p>
+        </header>
+        <main class="card-content">
+            <h3 class="title is-4">Informações pessoais</h3>
+            <div class="field">
+                <p:outputLabel for="nomeVitima" class="label" value="Seu nome"/>
+                <div class="control">
+                    <p:inputText id="nomeVitima" class="input" type="text" value="#{incidenteBean.vitima.nome}" placeholder="ex: João da Silva Pereira"/>
+                </div>
+            </div>
+            <div class="field is-flex is-align-items-center is-justify-content-start" style="gap: 10px">
+                <div class="control">
+                    <p:outputLabel for="idadeVitima" class="label pr-3" value="Sua idade"/>
+                    <p:inputNumber id="idadeVitima" type="number" value="#{incidenteBean.vitima.idade}" min="0" oninput="this.value = Math.abs(this.value)"/>
+                </div>
+                <div class="control">
+                    <p:outputLabel class="label pr-3" for="sexo">Sexo</p:outputLabel>
+                    <p:selectOneRadio class="radio" id="sexo" value="#{incidenteBean.vitima.sexo}">
+                        <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                        <f:selectItem itemLabel="Feminino" itemValue="F"/>
+                    </p:selectOneRadio>
+                </div>
+            </div>
+            <div class="field">
+                <p:outputLabel for="serieTurnoVitima" class="label" value="Sua série e turno"/>
+                <div class="control">
+                    <p:inputText id="serieTurnoVitima" class="input" type="text" value="#{incidenteBean.vitima.serieTurno}" placeholder="ex: Oitavo Ano - Manhã ou 8o - Tarde"/>
+                </div>
+            </div>
+            <div class="field">
+                <p:outputLabel for="enderecoVitima" class="label" value="Seu endereço"/>
+                <div class="control">
+                    <p:inputText id="enderecoVitima" class="input" type="text" value="#{incidenteBean.vitima.endereco}" placeholder="ex: Rua das Flores, 123 - Flôrlandia"/>
+                </div>
+            </div>
+            <h3 class="title is-4">Informações do Agressor</h3>
+            <div class="field">
+                <p:outputLabel for="nomeAgressor" class="label" value="Nome"/>
+                <div class="control">
+                    <p:inputText id="nomeAgressor" class="input" type="text" value="#{incidenteBean.agressor.nome}" placeholder="ex: João da Silva Pereira"/>
+                    <p class="help">Não se preocupe, caso você não saiba o nome completo, preencha as informações que você souber.</p>
+                </div>
+            </div>
+            <div class="field is-flex is-align-items-center is-justify-content-start" style="gap: 10px">
+                <div class="control">
+                    <p:outputLabel for="idadeAgressor" class="label pr-3" value="Idade"/>
+                    <p:inputNumber id="idadeAgressor" type="number" value="#{incidenteBean.agressor.idade}" min="0" oninput="this.value = Math.abs(this.value)"/>
+                </div>
+                <div class="control">
+                    <p:outputLabel class="label pr-3" for="sexoAgressor">Sexo</p:outputLabel>
+                    <p:selectOneRadio class="radio" id="sexoAgressor" value="#{incidenteBean.agressor.sexo}">
+                        <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                        <f:selectItem itemLabel="Feminino" itemValue="F"/>
+                    </p:selectOneRadio>
+                </div>
+            </div>
+            <div class="field">
+                <p:outputLabel for="parentescoAgressor" class="label" value="Grau de Parentesco / Relacionamento"/>
+                <div class="control">
+                    <p:inputText id="parentescoAgressor" class="input" type="text" value="#{incidenteBean.agressor.grauParentesco}" placeholder="ex: Tio, Namorado, Primo"/>
+                </div>
+            </div>
+            <div class="field">
+                <p:outputLabel for="ocupacaoAgressor" class="label" value="Profissão"/>
+                <div class="control">
+                    <p:inputText id="ocupacaoAgressor" class="input" type="text" value="#{incidenteBean.agressor.ocupacao}" placeholder="ex: Estudante, Professor, Médico"/>
+                </div>
+            </div>
+            <div class="field">
+                <p:outputLabel for="racaAgressor" class="label" value="Raça"/>
+                <div class="control">
+                    <p:selectOneRadio class="radio" id="racaAgressor" value="#{incidenteBean.agressor.raca}">
+                        <f:selectItem itemLabel="Branca" itemValue="Branca"/>
+                        <f:selectItem itemLabel="Preta" itemValue="Preta"/>
+                        <f:selectItem itemLabel="Parda" itemValue="Parda"/>
+                        <f:selectItem itemLabel="Amarela" itemValue="Amarela"/>
+                        <f:selectItem itemLabel="Indígena" itemValue="Indígena"/>
+                    </p:selectOneRadio>
+                </div>
+            </div>
+            <div class="field">
+                <p:outputLabel for="identidadeGeneroAgressor" class="label" value="Identidade de Gênero"/>
+                <div class="control">
+                    <p:selectOneRadio class="radio" id="identidadeGeneroAgressor" value="#{incidenteBean.agressor.identidadeGenero}">
+                        <f:selectItem itemLabel="Cisgênero" itemValue="Cisgênero"/>
+                        <f:selectItem itemLabel="Transgênero" itemValue="Transgênero"/>
+                        <f:selectItem itemLabel="Não-binário" itemValue="Não-binário"/>
+                        <f:selectItem itemLabel="Outro" itemValue="Outro"/>
+                    </p:selectOneRadio>
+                    <div class="field mt-1">
+                        <div class="control">
+                            <p:inputText class="input" value="#{incidenteBean.agressor.orientacaoSexualOutro}"/>
+                            <p class="help">Caso você tenha selecionado outro na pergunta acima.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <p:outputLabel for="orientacaoSexualAgressor" class="label" value="Orientação Sexual"/>
+                <div class="control">
+                    <p:selectOneRadio class="radio" id="orientacaoSexualAgressor" value="#{incidenteBean.agressor.orientacaoSexual}">
+                        <f:selectItem itemLabel="Heterossexual" itemValue="Heterossexual"/>
+                        <f:selectItem itemLabel="Homossexual" itemValue="Homossexual"/>
+                        <f:selectItem itemLabel="Bissexual" itemValue="Bissexual"/>
+                        <f:selectItem itemLabel="Outro" itemValue="Outro"/>
+                    </p:selectOneRadio>
+                    <div class="field mt-1">
+                        <div class="control">
+                            <p:inputText class="input" value="#{incidenteBean.agressor.orientacaoSexualOutro}"/>
+                            <p class="help">Caso você tenha selecionado outro na pergunta acima.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <p:outputLabel for="escolaridade" class="label" value="Escolaridade"/>
+                <div class="control">
+                    <p:selectOneRadio class="radio" id="escolaridade" value="#{incidenteBean.agressor.escolaridade}">
+                        <f:selectItem itemLabel="Ensino Fundamental" itemValue="Ensino Fundamental"/>
+                        <f:selectItem itemLabel="Ensino Médio" itemValue="Ensino Médio"/>
+                        <f:selectItem itemLabel="Ensino Superior" itemValue="Ensino Superior"/>
+                        <f:selectItem itemLabel="Pós-graduação" itemValue="Pós-graduação"/>
+                        <f:selectItem itemLabel="Outro" itemValue="Outro"/>
+                    </p:selectOneRadio>
+                    <div class="field mt-1">
+                        <div class="control">
+                            <p:inputText class="input" value="#{incidenteBean.agressor.orientacaoSexualOutro}"/>
+                            <p class="help">Caso você tenha selecionado outro na pergunta acima.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <p:outputLabel for="descricaoIncidente" class="label" value="Descrição do Incidente"/>
+                <p class="help">Relate o que a criança/adolescente contou para você, tente ser o mais claro possível, mas não insista com a vítima para que ela diga algo além do que ela consegue, pois isso pode acarretar mais dor para ela.</p>
+                <div class="control">
+                    <p:inputTextarea id="descricaoIncidente" class="textarea" value="#{incidenteBean.incidente.descricaoIncidente}"/>
+                </div>
+            </div>
+            <div class="field">
+                <p:outputLabel for="tipoViolacao" class="label" value="Tipo de Violência"/>
+                <div class="control">
+                    <p:selectManyCheckbox id="tipoViolacao" value="#{incidenteBean.incidente.tipoViolacao}" style="display:flex; flex-direction: column; flex-wrap: wrap">
+                        <f:selectItem itemLabel="Violência Física" itemValue="Violência Física"/>
+                        <f:selectItem itemLabel="Negligência" itemValue="Negligência"/>
+                        <f:selectItem itemLabel="Violência Sexual" itemValue="Violência Sexual"/>
+                        <f:selectItem itemLabel="Violência Psicológica" itemValue="Violência Psicológica"/>
+                        <f:selectItem itemLabel="Automutilação" itemValue="Automutilação"/>
+                        <f:selectItem itemLabel="Suicídio" itemValue="Suicídio"/>
+                        <f:selectItem itemLabel="Gravidez menor de 14 anos" itemValue="Gravidez 14 anos"/>
+                        <f:selectItem itemLabel="Trabalho Infantil" itemValue="Trabalho Infantil"/>
+                        <f:selectItem itemLabel="Bullying" itemValue="Bullying"/>
+                        <f:selectItem itemLabel="Outros" itemValue="Outros"/>
+                    </p:selectManyCheckbox>
+                    <div class="field mt-1">
+                        <div class="control">
+                            <p:inputText class="input" value="#{incidenteBean.agressor.orientacaoSexualOutro}"/>
+                            <p class="help">Caso você precise descrever outros tipos de violência que não foram contemplados pelas opções acima, seja sucinto.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <p:outputLabel for="providenciasTomadas" class="label" value="Providências Tomadas"/>
+                <div class="control">
+                    <p:inputTextarea id="providenciasTomadas" class="textarea" value="#{incidenteBean.incidente.providenciasTomadas}"/>
+                </div>
+            </div>
+            <footer class="card-footer">
+                <p:commandButton class="card-footer-item button is-link" value="Salvar" action="#{incidenteBean.save}" update="growl"/>
+            </footer>
+        </main>
+    </h:form>
+</h:body>
+</html>
